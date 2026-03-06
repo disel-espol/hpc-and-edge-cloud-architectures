@@ -5,7 +5,8 @@ Reproducibility package for paper "An Analysis of HPC and Edge Architectures in 
 https://github.com/disel-espol/hpc-and-edge-cloud-architectures/blob/main/hpc_n_edge_clouds_archs.ipynb
 
 ## How to cite:
-Steven Santillan and Cristina L. Abad. "An Analysis of HPC and Edge Architectures in the Cloud". _(to appear in) Proceedings of the IEEE International Conference on Cloud Engineering (IC2E), 2nd Workshop on Accelerated HPC in the Cloud-Edge Continuum (AHPC3)_. 2025.
+S. Santillan and C. L. Abad, "An Analysis of HPC and Edge Architectures in the Cloud," 2025 IEEE International Conference on Cloud Engineering (IC2E), Rennes, France, 2025, pp. 259-266, doi: 10.1109/IC2E65552.2025.00043. keywords: {Cloud computing;Architecture;Buildings;Computer architecture;Machine learning;Companies;Market research;Reproducibility of results;Complexity theory;Edge computing;HPC;edge computing;fog computing;cloud computing;architectures;workflows;AWS;cloud continuum},
+
 
 Pre-print: [arXiv](https://arxiv.org/abs/2508.01494) 
 
