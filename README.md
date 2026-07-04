@@ -1,13 +1,19 @@
-# An Analysis of HPC and Edge Architectures in the Cloud
-Reproducibility package for paper "An Analysis of HPC and Edge Architectures in the Cloud" by Steven Santillán and [Cristina L. Abad](https://sites.google.com/fiec.espol.edu.ec/cv-cabad/english) from [ESPOL University](https://www.espol.edu.ec/en).
+# Reproducibility Packages for Cloud Architecture Studies
 
-## Reproducibility script:
-https://github.com/disel-espol/hpc-and-edge-cloud-architectures/blob/main/hpc_n_edge_clouds_archs.ipynb
+This repository contains the reproducibility packages for two related studies on cloud architectures.
 
-## How to cite:
-S. Santillan and C. L. Abad, "An Analysis of HPC and Edge Architectures in the Cloud," 2025 IEEE International Conference on Cloud Engineering (IC2E), Rennes, France, 2025, pp. 259-266, doi: 10.1109/IC2E65552.2025.00043. keywords: {Cloud computing;Architecture;Buildings;Computer architecture;Machine learning;Companies;Market research;Reproducibility of results;Complexity theory;Edge computing;HPC;edge computing;fog computing;cloud computing;architectures;workflows;AWS;cloud continuum},
+Please select the package corresponding to the paper you are currently reading:
+
+## Workshop Paper
+
+[**Reproducibility Package — *An Analysis of HPC and Edge Architectures in the Cloud***](./Workshop_paper)
 
 
-DOI: [10.1109/IC2E65552.2025.00043](https://doi.org/10.1109/IC2E65552.2025.00043)
 
-Note: In the current version of the analysis, the architecture with ID CTG23wd9H74, titled "Building an HPC Modeling Platform to Simplify AWS Usage for Scientists and Engineers", was classified as HPC. However, due to the presence of the CloudFront edge distribution service, its correct categorization should be HPC+Edge. This discrepancy does not significantly affect the overall results but is recorded here for accuracy and transparency purposes.
+## Journal Paper
+
+[**Reproducibility Package — *How are HPC, Edge and Serverless Architectures built in the Cloud Continuum? An analysis of real cloud architecture in AWS***](./Journal_paper)
+
+
+
+Each reproducibility package includes the datasets, source code, scripts, notebooks, generated results, and detailed instructions needed to reproduce the analyses presented in its corresponding paper.
