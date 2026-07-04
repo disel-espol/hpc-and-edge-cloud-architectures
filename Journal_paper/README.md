@@ -37,4 +37,4 @@ Citation details will be added after the journal paper is accepted or published.
 
 ## Related Reproducibility Package
 
-For the previous workshop study, see the [reproducibility package for *“An Analysis of HPC and Edge Architectures in the Cloud”*](../workshop_paper/README.md).
+For the previous workshop study, see the [reproducibility package for *“An Analysis of HPC and Edge Architectures in the Cloud”*](../Workshop_paper/README.md).
