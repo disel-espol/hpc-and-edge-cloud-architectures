@@ -12,7 +12,7 @@ Please select the package corresponding to the paper you are currently reading:
 
 ## Journal Paper (under review)
 
-[**Reproducibility Package — *How are HPC, Edge and Serverless Architectures built in the Cloud Continuum? An analysis of real cloud architecture in AWS***](./Journal_paper)
+[**Reproducibility Package — *How are HPC, Edge and Serverless Architectures built in the Cloud Continuum? An empirical analysis of cloud architectures in AWS***](./Journal_paper)
 
 
 
