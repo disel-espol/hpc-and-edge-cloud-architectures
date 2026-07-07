@@ -1,12 +1,12 @@
 # How Are HPC, Edge, and Serverless Architectures Built in the Cloud Continuum?
 
-## An Analysis of Real Cloud Architectures in AWS
+## An empirical analysis of cloud architectures in AWS
 
-Reproducibility package for the journal paper *“How Are HPC, Edge, and Serverless Architectures Built in the Cloud Continuum? An Analysis of Real Cloud Architectures in AWS”* by Steven Santillán and [Cristina L. Abad](https://sites.google.com/fiec.espol.edu.ec/cv-cabad/english) from [ESPOL University](https://www.espol.edu.ec/en).
+Reproducibility package for the journal paper (under review) *“How Are HPC, Edge, and Serverless Architectures Built in the Cloud Continuum? An empirical analysis of cloud architectures in AWS”* by Steven Santillán and [Cristina L. Abad](https://sites.google.com/fiec.espol.edu.ec/cv-cabad/english) from [ESPOL University](https://www.espol.edu.ec/en).
 
 This package reproduces the analyses of **396 real-world AWS architecture graphs** from the Cloudscape dataset. The study investigates how High-Performance Computing (HPC), Edge, and Serverless architectures are combined in practice, and further examines Strictly Edge, Function-as-a-Service (FaaS), Serverless Compute, and Event-Driven subcategories.
 
-The package is organized as four focused Jupyter notebooks. They share processed data artifacts rather than relying on variables left in the memory of another notebook. This makes each analytical component easier to inspect and reproduce independently.
+The package is organized as four focused Jupyter notebooks. They share processed data artifacts to make each component easier to inspect and reproduce independently.
 
 ## Package Structure
 
