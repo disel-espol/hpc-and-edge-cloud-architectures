@@ -1,0 +1,76 @@
+name: Deploy Journal_paper notebooks to Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Journal_paper/**.ipynb"
+      - ".github/workflows/notebooks-to-pages.yml"
+  workflow_dispatch: # allows manual runs from the Actions tab
+
+# Minimum permissions required to deploy to Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent overlapping deployments from stepping on each other
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install nbconvert
+        run: pip install --upgrade nbconvert
+
+      - name: Convert notebooks to HTML
+        run: |
+          mkdir -p _site
+          # Convert ALL .ipynb files in Journal_paper as-is (uses the outputs
+          # already saved in the notebook, does NOT re-run the cells).
+          jupyter nbconvert --to html Journal_paper/*.ipynb --output-dir _site
+
+      - name: Generate index page
+        run: |
+          {
+            echo '<!DOCTYPE html>'
+            echo '<html lang="en"><head><meta charset="utf-8">'
+            echo '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            echo '<title>Journal Paper — Notebooks</title>'
+            echo '<style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:760px;margin:3rem auto;padding:0 1rem;line-height:1.6;color:#1f2328}h1{border-bottom:2px solid #eaeef2;padding-bottom:.4rem}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}li{margin:.5rem 0}</style>'
+            echo '</head><body>'
+            echo '<h1>Journal Paper — Notebooks</h1>'
+            echo '<p>Automatically rendered from the <code>Journal_paper</code> folder.</p>'
+            echo '<ul>'
+            for f in _site/*.html; do
+              name=$(basename "$f")
+              [ "$name" = "index.html" ] && continue
+              echo "<li><a href=\"$name\">${name%.html}</a></li>"
+            done
+            echo '</ul></body></html>'
+          } > _site/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
