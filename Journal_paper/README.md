@@ -6,7 +6,7 @@ Reproducibility package for the journal paper (under review) *“How Are HPC, Ed
 
 This package reproduces the analyses of **396 real-world AWS architecture graphs** from the Cloudscape dataset. The study investigates how High-Performance Computing (HPC), Edge, and Serverless architectures are combined in practice, and further examines Strictly Edge, Function-as-a-Service (FaaS), Serverless Compute, and Event-Driven subcategories.
 
-The package is organized as four focused Jupyter notebooks. They share processed data artifacts to make each component easier to inspect and reproduce independently.
+The package is organized as six focused Jupyter notebooks. They share processed data artifacts to make each component easier to inspect and reproduce independently.
 
 ## Package Structure
 
@@ -20,6 +20,8 @@ Journal_paper/
 ├── 02_analyze_graph_metrics.ipynb
 ├── 03_mine_frequent_graph_patterns.ipynb
 ├── 04_analyze_temporal_trends.ipynb
+├── 05_statistical_significance_tests_for_pairwise_comparisons.ipynb
+├── 06_service_rank_stability_selection_bootstrappingTests.ipynb
 └── README.md
 ```
 
@@ -317,6 +319,66 @@ The key must not be written directly in the notebook or committed to the reposit
 
 and run the trend-analysis code cell that reads this file.
 
+---
+
+### 5. [Statistical Significance Tests for Pairwise Comparisons](./05_statistical_significance_tests_for_pairwise_comparisons.ipynb)
+
+**Purpose:** Interactive statistical-significance calculator used to validate the pairwise comparisons and single-group prevalence figures reported in the manuscript.
+
+This notebook is self-contained. Instead of reading the package's classification CSV, it operates on hardcoded analytical group sizes and observed service counts transcribed directly from the paper's descriptive results, and provides two independent calculators.
+
+#### Main processing stages
+
+1. **Pairwise significance thresholds**
+   - Defines the six analytical group sizes (`HPC`, `None`, `Strictly Edge`, `Edge`, `FaaS`, `Serverless`) as `DATASET_SIZES`.
+   - For all 15 possible group pairs, computes the minimum percentage-point difference in prevalence required for statistical significance at α = 0.05.
+   - Uses Fisher's Exact test when either group has fewer than 50 observations, and a two-proportion Z-test otherwise.
+   - Given a baseline prevalence for Group A, reports the required prevalence gap in Group B for the difference to be significant, plus the observed difference for a chosen prevalence pair.
+
+2. **Single-service Clopper-Pearson confidence intervals**
+   - Computes exact 95% Clopper-Pearson confidence intervals for service prevalence within each analytical group, from raw observed per-group counts.
+   - Pre-loaded with the paper's observed counts for the key services discussed in Figure 4 (S3, EC2, Lambda, FSx, EKS, Batch/DynamoDB, CloudFront, ThirdParty, UserConsumerWeb/Mobile/Edge, API Gateway, RDS, and others).
+
+#### Important inputs
+
+- None. Dataset sizes and observed counts are hardcoded from the paper's descriptive results; the notebook does not depend on Cloudscape or on `classified_architectures_with_metadata.csv`.
+
+#### Main outputs
+
+- Console-printed pairwise-threshold tables and per-service confidence-interval tables. No files are written to disk; results are read directly from the notebook output.
+
+**Execution note:** Cells are meant to be run interactively. Edit the `prevalence1`/`prevalence2` variables or the `observed_counts` dictionaries for the comparison of interest, then re-run the corresponding cell.
+
+---
+
+### 6. [Service Rank Stability Selection (Bootstrapping Tests)](./06_service_rank_stability_selection_bootstrappingTests.ipynb)
+
+**Purpose:** Bootstrap-based stability analysis of the service and functional-goal rankings reported per analytical group.
+
+The notebook loads `classified_architectures_with_metadata.csv` directly and does not depend on the in-memory state of any other notebook. It evaluates how stable the "top N" rankings of services and functional goals are under resampling.
+
+#### Main processing stages
+
+1. **Top services per group**
+   - Parses the `services` column into Python lists.
+   - For each analytical group (`HPC`, `Edge`, `Serverless`, `FaaS`, `Strictly Edge`), identifies the 15 most frequent services and builds a binary architecture-by-service matrix.
+   - Runs 5,000 bootstrap resamples (fixed seed = 42) of each group, re-ranking services by simulated frequency in every iteration.
+   - Reports, per service: original count, average rank position across iterations, 95% rank confidence interval, and the frequency with which the service finishes in the top 2.
+
+2. **Top functional goals per group**
+   - Repeats the same bootstrap ranking procedure using the `category` column (functional goals) instead of services.
+   - Adds the `None` group to the analytical set for this analysis.
+
+#### Important inputs
+
+- `classified_architectures_with_metadata.csv`, generated by Notebook 1 and included as a precomputed package artifact.
+
+#### Main outputs
+
+- Console-printed rank-stability summary tables per group, one for services and one for functional goals, sorted by average rank position. No files are written to disk.
+
+**Execution note:** Self-contained. Can be run independently of any other notebook as long as `classified_architectures_with_metadata.csv` is available in the working directory.
+
 ## Recommended Execution Paths
 
 ### Full regeneration from the original Cloudscape graphs
@@ -325,6 +387,8 @@ and run the trend-analysis code cell that reads this file.
 2. Run `02_analyze_graph_metrics.ipynb`.
 3. Run `03_mine_frequent_graph_patterns.ipynb`.
 4. Run `04_analyze_temporal_trends.ipynb`, supplying the `Api-YT` Colab Secret to rerun the year-retrieval step.
+5. *(Optional, statistical validation)* Run `05_statistical_significance_tests_for_pairwise_comparisons.ipynb` to reproduce the significance thresholds and confidence intervals underlying the manuscript's pairwise comparisons.
+6. *(Optional, statistical validation)* Run `06_service_rank_stability_selection_bootstrappingTests.ipynb`, after Notebook 1, to reproduce the bootstrap rank-stability tables for services and functional goals.
 
 ### Reproduce a specific analytical component
 
@@ -332,6 +396,8 @@ and run the trend-analysis code cell that reads this file.
 - **Graph metrics:** Run Notebook 2 independently. It obtains Cloudscape and the classification CSV itself.
 - **Frequent graph patterns:** Run Notebook 3 independently. It obtains Cloudscape and the classification CSV itself.
 - **Temporal figures without API access:** Use the included `architectures_with_year.csv` and run only the plotting portion of Notebook 4.
+- **Pairwise significance tests and confidence intervals:** Run Notebook 5 independently at any time. It requires no input files.
+- **Service and functional-goal rank stability:** Run Notebook 6 independently, once `classified_architectures_with_metadata.csv` (produced by Notebook 1) is available.
 
 ## Software Requirements
 
@@ -340,6 +406,7 @@ The notebooks were developed and executed in Google Colab. The principal Python 
 ```text
 pandas
 numpy
+scipy
 networkx
 lxml
 matplotlib
@@ -348,7 +415,7 @@ requests
 tqdm
 ```
 
-The Cloudscape-dependent notebooks require internet access to clone the public Cloudscape repository. The temporal retrieval stage additionally requires internet access to the YouTube Data API.
+The Cloudscape-dependent notebooks require internet access to clone the public Cloudscape repository. The temporal retrieval stage additionally requires internet access to the YouTube Data API. Notebooks 5 and 6 require no internet access; they operate on hardcoded values and on the local `classified_architectures_with_metadata.csv` file, respectively.
 
 ## External Data Source
 
