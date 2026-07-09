@@ -23,6 +23,36 @@ Journal_paper/
 └── README.md
 ```
 
+## Figures and Tables
+
+The figures and tables referenced in the manuscript are rendered in the HTML exports of the corresponding notebooks. Each entry below links directly to the section where the item appears.
+
+### Temporal Trends ([`04_analyze_temporal_trends`](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/04_analyze_temporal_trends.html))
+
+| Item | Link |
+|---|---|
+| Figure 2 | [View Figure 2](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/04_analyze_temporal_trends.html#figure-2) |
+
+### Architecture Characteristics ([`01_analyze_architecture_characteristics`](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html))
+
+| Item | Link |
+|---|---|
+| Figure 3 | [View Figure 3](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#figure-3) |
+| Figure 4 | [View Figure 4](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#figure-4) |
+| Figure 5 | [View Figure 5](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#figure-5) |
+| Figure 6 | [View Figure 6](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#figure-6) |
+| Figure 7 | [View Figure 7](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#figure-7) |
+| Figure 8 | [View Figure 8](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#figure-8-a) |
+| Figure 9 | [View Figure 9](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#figure-9) |
+| Table 2 | [View Table 2](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#Table-2) |
+| Table 5 | [View Table 5](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/01_analyze_architecture_characteristics.html#table-5) |
+
+### Graph Metrics ([`02_analyze_graph_metrics`](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/02_analyze_graph_metrics.html))
+
+| Item | Link |
+|---|---|
+| Table 6 | [View Table 6](https://disel-espol.github.io/hpc-and-edge-cloud-architectures/02_analyze_graph_metrics.html#table-6) |
+
 ## Data Artifacts
 
 ### `architectures_with_services.pkl`
